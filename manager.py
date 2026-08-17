@@ -16,8 +16,19 @@ def save_task(tasks_list):
 def add_task():
     new_id = 1
     title = input('Введите названия задачи: ')
+    description = input('Описание задачи: ')
+    deadline = input('Введите дату дедлайна "дд.мм.гг": ')
+
+    priority_selection = {
+        1: 'Высокий',
+        2: 'Средний',
+        3: 'Низкий',
+    }
+    priority = int(input('Приоретет: \n1)Высокий \n2)Средний \n3)Низкий \n'))
+    priority = priority_selection[priority]
+
     status = False
-    date_create = datetime.datetime.now().strftime("%d.%m.%Y")
+    date_create = datetime.datetime.now().strftime('%d.%m.%Y')
 
     tasks_list = load_task()
     task_id_list = []
@@ -29,6 +40,9 @@ def add_task():
     new_task = {
         'id': new_id,
         'title': title,
+        'description': description,
+        'deadline': deadline,
+        'priority': priority,
         'status': status,
         'date_create': date_create,
     }
@@ -60,7 +74,7 @@ while True:
     elif user_choose == 2:
         tasks_list = load_task()
         for task in tasks_list:
-            print(f"{task['id']}: {task['title']}")
+            print(f"{task['id']} | {task['title']} | {task['deadline']} | {task['priority']} | {task['status']}")
 
 
     elif user_choose == 3:
@@ -69,7 +83,13 @@ while True:
         tasks_list = load_task()
         for task in tasks_list:
             if task['id'] == id_task:
-                print(f"{task['id']}: {task['title']}  --->  {task['status']}")
+                print(f"""
+Айди - {task['id']}
+Название - {task['title']}
+Дедлайн - {task['deadline']}
+Приорете - {task['priority']}
+Статус - {task['status']}
+Дата создание - {task['date_create']}""")
                 break
 
 
