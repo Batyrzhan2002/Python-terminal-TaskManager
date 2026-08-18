@@ -27,7 +27,7 @@ def add_task():
     priority = int(input('Приоретет: \n1)Высокий \n2)Средний \n3)Низкий \n'))
     priority = priority_selection[priority]
 
-    status = False
+    status = 'Не выполнено'
     date_create = datetime.datetime.now().strftime('%d.%m.%Y')
 
     tasks_list = load_task()
@@ -95,13 +95,26 @@ while True:
 
     elif user_choose == 4:
         id_task = int(input('Введите номер айди: '))
-        
+
         tasks_list = load_task()
         for task in tasks_list:
             if task['id'] == id_task:
                 new_title = input('Введите новое название: ')
+                new_description = input('Описание задачи: ')
+                new_deadline = input('Введите дату дедлайна "дд.мм.гг": ')
+                
+                priority_selection = {
+                        1: 'Высокий',
+                        2: 'Средний',
+                        3: 'Низкий',
+                    }
+                new_priority = int(input('Приоретет: \n1)Высокий \n2)Средний \n3)Низкий \n'))
+                new_priority = priority_selection[new_priority]
+
                 task['title'] = new_title
-                print(task['title'])
+                task['des'] = new_description
+                task['deadline'] = new_deadline
+                task['priority'] = new_priority
                 save_task(tasks_list)
                 break
 
